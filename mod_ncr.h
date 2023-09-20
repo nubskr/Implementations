@@ -1,3 +1,4 @@
+const int N = 100;
 int fact[N], invfact[N];
 
 int pow(int a, int b, int m)

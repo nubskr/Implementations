@@ -1,52 +1,54 @@
-// range minimum query
+// RMQ
 #include <bits/stdc++.h>
 using namespace std;
-#define vi vector <int>
-#define pi pair <int, int>
-typedef long long ll;
-vector <int> tree, a;
- 
-void build (int v, int start, int end)
+
+vector <int> stree, a;
+
+int merge(int x,int y){
+    return min(x,y);
+}
+
+void build(int v, int start, int end)
 {
-    if (start == end) tree[v] = a[start]; 
+    if (start == end) stree[v] = a[start]; 
     else
     {
         int mid = (start + end)/2;
         build(2*v, start, mid);
         build(2*v + 1, mid + 1, end);
-        tree[v] = min(tree[2*v], tree[2*v + 1]);
+        stree[v] = merge(stree[2*v],stree[2*v + 1]);
     }
 }
  
-int search (int v, int start, int end, int l, int r)
+int query(int v, int start, int end, int l, int r)
 {
+    // PAY ATTENTION HERE
     if (l > end || r < start) return (1 << 30);
     
-    if (l <= start && r >= end) return tree[v];
+    if (l <= start && r >= end) return stree[v];
     int mid = (start + end)/2;
-    return min(search(2*v, start, mid, l, r), search(2*v + 1, mid + 1, end, l, r));
+    return merge(query(2*v, start, mid, l, r), query(2*v + 1, mid + 1, end, l, r));
 }
  
-void update (int v, int start, int end, int index, int x)
+void update(int v, int start, int end, int index, int x)
 {
-    if (start == end) tree[v] = x;
+    if (start == end) stree[v] = x;
     else
     {
         int mid = (start + end)/2;
         if (index <= mid) update(2*v, start, mid, index, x);
         else update(2*v + 1, mid + 1, end, index, x);
-        tree[v] = min(tree[2*v], tree[2*v + 1]);
+        stree[v] = merge(stree[2*v],stree[2*v + 1]);
     }
 }
  
 int main() 
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
     int n, m;
     cin >> n >> m;
     a.resize(n + 1);
-    tree.resize(4*n);
+    stree.resize(4*n);
+    // a must be 1 indexed
     for (int i = 1; i <= n; i++)
         cin >> a[i];
         
@@ -58,6 +60,6 @@ int main()
         cin >> y >> z;
         x = 2;
         if (x == 1) update(1, 1, n, y, z);
-        else cout << search(1, 1, n, y, z) << endl;
+        else cout << query(1, 1, n, y, z) << endl;
     }
 }
