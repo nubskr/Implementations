@@ -1,8 +1,9 @@
 const int N = 100;
 int fact[N], invfact[N];
 
-int pow(int a, int b, int m)
+int modpow(int a, int b, int m = MOD)
 {
+	// a^b
 	int ans=1;
 	while(b)
 	{
@@ -16,7 +17,7 @@ int pow(int a, int b, int m)
 
 int modinv(int k)
 {
-	return pow(k, MOD-2, MOD);
+	return modpow(k, MOD-2, MOD);
 }
 
 void precompute()
