@@ -24,3 +24,11 @@ void init(int m = n-1){
 		addedge(a,b);
 	}
 }
+
+void dfs(int v) {
+    vis[v] = true;
+    for (int u : adj[v]) {
+        if (!vis[u])
+            dfs(u);
+    }
+}
