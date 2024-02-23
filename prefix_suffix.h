@@ -30,4 +30,10 @@ struct PSA{
     int suf_query(int i){
         return suf[i];
     }
+
+    int range_query(int l,int r){
+        // only for sums
+        // 0 indexed!
+        return (pre_query(r) - (l>0 ? pre_query(l-1) : 0));
+    }
 };
