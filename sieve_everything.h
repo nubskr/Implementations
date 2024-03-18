@@ -67,7 +67,7 @@ vector<pair<int,int>> prime_factor(int x){
     // almost sqrt(N)
     vector<pair<int,int>> v;
     for (int p : primes) {
-        if ((ll)p*p > x) {
+        if ((long long)p*p > x) {
             break;
         }
         if (x % p == 0) {
