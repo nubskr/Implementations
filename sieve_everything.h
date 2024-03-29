@@ -37,13 +37,14 @@ vector<int> factorise(int x){
     for (int i = 1; i*i <= x; ++i)
     {
         if(x%i==0){
-            v.push_back(x);
+            v.push_back(i);
             int other = x/i;
             if(other != i){
                 v.push_back(other);
             }
         }
     }
+    sort(v.begin(),v.end());
     return v;
 }
 
