@@ -2,7 +2,7 @@ const int MOD = 1e9 + 7
 const int N = 100;
 int fact[N], invfact[N];
 
-int pow(int a, int b, int m = MOD)
+int modpow(int a, int b, int m = MOD)
 {
 	// a^b
 	int ans=1;
@@ -26,14 +26,12 @@ void precompute()
 	fact[0]=fact[1]=1;
 	for(int i=2;i<N;i++)
 	{
-		fact[i]=fact[i-1]*i;
-		fact[i]%=MOD;
+		fact[i]=((fact[i-1]%MOD)*(i%MOD))%MOD;
 	}
 	invfact[N-1]=modinv(fact[N-1]);
 	for(int i=N-2;i>=0;i--)
 	{
-		invfact[i]=invfact[i+1]*(i+1);
-		invfact[i]%=MOD;
+		invfact[i]=(invfact[i+1]%MOD*(i+1)%MOD)%MOD;
 	}
 }
 
