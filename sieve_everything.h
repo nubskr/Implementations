@@ -1,7 +1,7 @@
-const int N = 1e6 + 10;
+const int N = 3e5 + 10;
 bool is_prime[N+1];
-int spf[N];
 vector<int> primes;
+int spf[N];
 
 void sieve(){
     // memset(is_prime,1,is_prime + N);

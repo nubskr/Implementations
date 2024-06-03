@@ -1,4 +1,4 @@
-const int MOD = 1e9 + 7
+const int MOD = 1e9 + 7;
 const int N = 100;
 int fact[N], invfact[N];
 
